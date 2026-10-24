@@ -4,6 +4,10 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-10-25
+
+Defines protocol version `v0.4.0`. Additive over v0.3.0: every manifest valid under v0.3.0 still validates in strict mode, and every manifest valid under v0.1.0 still validates in lenient mode.
+
 ### Added
 
 - `read_secrets` capability and optional `secrets` field (secret names only); a manifest with `secrets` must declare `read_secrets` ([#19](https://github.com/ao3575911/living-repos-protocol/issues/19)).
@@ -51,6 +55,20 @@ Defines protocol version `v0.3.0`. Additive over v0.2.1: every manifest valid un
 ### Changed
 - `docs/spec.md` describes the two validation modes.
 
+## [0.2.0] - 2026-10-25
+
+This entry was missing when v0.2.0 was released and was added in v0.4.0, from the merged pull requests.
+
+### Added
+- Full manifest specification in `docs/spec.md` ([#7](https://github.com/ao3575911/living-repos-protocol/pull/7)).
+- The schema enforces the spec's field rules: allowed values, patterns and no unknown fields ([#8](https://github.com/ao3575911/living-repos-protocol/pull/8)). Version 0.2.1 made this opt-in with `--strict`.
+- Conformance fixtures in `tests/valid/` and `tests/invalid/` ([#9](https://github.com/ao3575911/living-repos-protocol/pull/9)).
+- Reusable GitHub Action for validating manifests (`action.yml`) ([#10](https://github.com/ao3575911/living-repos-protocol/pull/10)).
+
+### Changed
+- Completed the PRD and the versioning policy ([#11](https://github.com/ao3575911/living-repos-protocol/pull/11)).
+- Dependency updates: actions/checkout 7.0.1, markdownlint-cli2-action 24.2.0, setup-python 7.1.0, jsonschema 4.26.0, PyYAML 6.0.3.
+
 ## [0.1.0] - 2026-10-24
 
 ### Added
@@ -58,5 +76,9 @@ Defines protocol version `v0.3.0`. Additive over v0.2.1: every manifest valid un
 - CI job `test`: Markdown lint and schema self-check plus validation of the example manifest.
 - Licence, contributing guide, security policy, code of conduct, issue and PR templates.
 
-[Unreleased]: https://github.com/ao3575911/living-repos-protocol/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/ao3575911/living-repos-protocol/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/ao3575911/living-repos-protocol/compare/v0.3.0...v0.4.0
+[0.3.0]: https://github.com/ao3575911/living-repos-protocol/compare/v0.2.1...v0.3.0
+[0.2.1]: https://github.com/ao3575911/living-repos-protocol/compare/v0.2.0...v0.2.1
+[0.2.0]: https://github.com/ao3575911/living-repos-protocol/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/ao3575911/living-repos-protocol/releases/tag/v0.1.0

@@ -60,7 +60,7 @@ Validate a repository's manifest in CI:
 
 ```yaml
 - uses: actions/checkout@v7.0.1
-- uses: ao3575911/living-repos-protocol@v0.3.0
+- uses: ao3575911/living-repos-protocol@v0.4.0
   with:
     manifests: .living/manifest.yaml
 ```
@@ -82,7 +82,7 @@ Docs site: [https://ao3575911.github.io/living-repos-protocol/](https://ao357591
 
 ## Status
 
-Draft. Protocol version `v0.3.0`; repository release v0.3.0. Strict mode enforces every rule in the spec; the default lenient mode accepts every manifest valid under v0.1.0. `tests/` holds the conformance fixtures.
+Draft. Protocol version `v0.4.0`; repository release v0.4.0. Runtimes declare what they support in a runtime capability document. Strict mode enforces every rule in the spec; the default lenient mode accepts every manifest valid under v0.1.0. `tests/` holds the conformance fixtures.
 
 ## Related
 
