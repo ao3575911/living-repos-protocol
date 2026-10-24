@@ -30,9 +30,9 @@ STRICT = load("manifest.schema.json")
 def check(path, strict):
     """Return (errors, warnings) as lists of strings."""
     doc = yaml.safe_load(pathlib.Path(path).read_text())
-    fmt = lambda e: f"{e.json_path}: {e.message}"
-    errors = [fmt(e) for e in LENIENT.iter_errors(doc)]
-    extra = [fmt(e) for e in STRICT.iter_errors(doc)] if not errors else []
+    errors = [f"{e.json_path}: {e.message}" for e in LENIENT.iter_errors(doc)]
+    # Strict rules are only meaningful once the v0.1.0 rules pass.
+    extra = [f"{e.json_path}: {e.message}" for e in STRICT.iter_errors(doc)] if not errors else []
     return (errors + extra, []) if strict else (errors, extra)
 
 
@@ -50,8 +50,23 @@ def files(pattern):
     return sorted(glob.glob(str(ROOT / pattern)))
 
 
+def undescribed(node, path="$"):
+    """Yield paths of schema properties that lack a description."""
+    for key in ("properties", "patternProperties"):
+        for name, sub in node.get(key, {}).items():
+            here = f"{path}.{name}"
+            if "description" not in sub:
+                yield here
+            yield from undescribed(sub, here)
+    if isinstance(node.get("items"), dict):
+        yield from undescribed(node["items"], path + "[]")
+
+
 def self_test():
-    ok = True
+    missing = list(undescribed(STRICT.schema))
+    for m in missing:
+        print(f"FAIL no description: {m}")
+    ok = not missing
     for p in files("examples/*.yaml") + files("tests/valid/*.yaml"):
         e, w = check(p, strict=True)
         ok &= not e

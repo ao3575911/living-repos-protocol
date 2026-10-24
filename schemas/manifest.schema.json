@@ -4,53 +4,135 @@
   "title": "Living Repository Manifest",
   "description": "Manifest at .living/manifest.yaml. Defined in docs/spec.md.",
   "type": "object",
-  "required": ["protocol_version", "project_id", "agent_capabilities", "isolation_profile", "state_publication", "logging_requirements"],
+  "required": [
+    "protocol_version",
+    "project_id",
+    "agent_capabilities",
+    "isolation_profile",
+    "state_publication",
+    "logging_requirements"
+  ],
   "additionalProperties": false,
   "patternProperties": {
-    "^x-": {}
+    "^x-": {
+      "description": "Extension field. Runtimes that do not understand it must ignore it."
+    }
   },
   "properties": {
     "protocol_version": {
       "type": "string",
-      "pattern": "^v\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$"
+      "pattern": "^v\\d+\\.\\d+\\.\\d+(-[0-9A-Za-z.-]+)?$",
+      "description": "Protocol version the manifest targets: v followed by SemVer, for example v0.1.0-draft."
     },
     "project_id": {
       "type": "string",
-      "pattern": "^[a-z0-9][a-z0-9-]{0,62}$"
+      "pattern": "^[a-z0-9][a-z0-9-]{0,62}$",
+      "description": "Stable repository identifier: lowercase letters, digits and hyphens, at most 63 characters."
     },
     "agent_capabilities": {
       "type": "array",
       "minItems": 1,
       "uniqueItems": true,
       "items": {
-        "enum": ["run_tasks", "publish_state", "open_pull_requests", "snapshot_restore", "handoff"]
-      }
+        "enum": [
+          "run_tasks",
+          "publish_state",
+          "open_pull_requests",
+          "snapshot_restore",
+          "handoff"
+        ],
+        "description": "run_tasks, publish_state, open_pull_requests, snapshot_restore or handoff. See docs/spec.md."
+      },
+      "description": "What the agent may do. A runtime must refuse to start an agent that declares a capability it does not support."
     },
     "isolation_profile": {
-      "enum": ["dedicated-vm", "container", "sandbox-process"]
+      "enum": [
+        "dedicated-vm",
+        "container",
+        "sandbox-process"
+      ],
+      "description": "How the runtime isolates the agent."
     },
     "state_publication": {
       "type": "object",
-      "required": ["target"],
+      "required": [
+        "target"
+      ],
       "additionalProperties": false,
       "properties": {
-        "target": { "enum": ["control-process", "file", "webhook"] },
-        "path": { "type": "string", "minLength": 1 },
-        "url": { "type": "string", "pattern": "^https://" }
+        "target": {
+          "enum": [
+            "control-process",
+            "file",
+            "webhook"
+          ],
+          "description": "control-process, file or webhook."
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "description": "State file path relative to the repository root. Required when target is file."
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^https://",
+          "description": "https URL that receives state. Required when target is webhook."
+        }
       },
       "allOf": [
-        { "if": { "properties": { "target": { "const": "file" } } }, "then": { "required": ["path"] } },
-        { "if": { "properties": { "target": { "const": "webhook" } } }, "then": { "required": ["url"] } }
-      ]
+        {
+          "if": {
+            "properties": {
+              "target": {
+                "const": "file"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "path"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "target": {
+                "const": "webhook"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "url"
+            ]
+          }
+        }
+      ],
+      "description": "Where the agent publishes its state."
     },
     "logging_requirements": {
       "type": "object",
-      "required": ["structured"],
+      "required": [
+        "structured"
+      ],
       "additionalProperties": false,
       "properties": {
-        "structured": { "type": "boolean" },
-        "level": { "enum": ["debug", "info", "warn", "error"] }
-      }
+        "structured": {
+          "type": "boolean",
+          "description": "true means one JSON object per log line."
+        },
+        "level": {
+          "enum": [
+            "debug",
+            "info",
+            "warn",
+            "error"
+          ],
+          "description": "Minimum log level. Default info."
+        }
+      },
+      "description": "How the agent logs."
     }
   }
 }
