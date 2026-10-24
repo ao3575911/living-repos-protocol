@@ -32,7 +32,7 @@ The key words MUST, MUST NOT, SHOULD and MAY are used as described in RFC 2119.
 - `snapshot_restore`: the runtime can snapshot and restore the agent's environment.
 - `handoff`: the agent can hand a running session to another runtime.
 
-A runtime MUST refuse to start an agent that declares a capability it does not support.
+A runtime MUST refuse to start an agent that declares a capability it does not support. Runtimes declare what they support in a [runtime capability document](runtime.md).
 
 ### `state_publication`
 

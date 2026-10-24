@@ -1,0 +1,5 @@
+runtime: example-runtime
+protocol_versions: [v0.1]
+agent_capabilities: [run_tasks, publish_state]
+isolation_profiles: [container, sandbox-process]
+state_publication_targets: [control-process, file]

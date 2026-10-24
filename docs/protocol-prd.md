@@ -31,5 +31,4 @@ Out of scope: the runtime itself, authentication, billing and scheduling.
 
 ## Open questions
 
-- How a runtime advertises which capabilities it supports.
 - Whether secrets access needs its own capability.
