@@ -23,6 +23,7 @@ The key words MUST, MUST NOT, SHOULD and MAY are used as described in RFC 2119.
 | Field | Type | Rule |
 | --- | --- | --- |
 | `snapshot` | object | What the runtime snapshots when the agent declares `snapshot_restore`. Added in release v0.3.0. See below. |
+| `secrets` | array of strings | Names of the secrets the agent needs. Requires `read_secrets`. Added in release v0.4.0. See below. |
 
 ### `agent_capabilities` values
 
@@ -31,6 +32,7 @@ The key words MUST, MUST NOT, SHOULD and MAY are used as described in RFC 2119.
 - `open_pull_requests`: the agent opens pull requests against the repository.
 - `snapshot_restore`: the runtime can snapshot and restore the agent's environment.
 - `handoff`: the agent can hand a running session to another runtime.
+- `read_secrets`: the runtime gives the agent the secrets named in `secrets`. Added in release v0.4.0.
 
 A runtime MUST refuse to start an agent that declares a capability it does not support. Runtimes declare what they support in a [runtime capability document](runtime.md).
 
@@ -57,6 +59,14 @@ A runtime MUST refuse to start an agent that declares a capability it does not s
 | `retention_days` | integer | no | At least 1. Default 7. |
 
 A manifest that declares `snapshot_restore` SHOULD include `snapshot`. Without it, the runtime decides what to snapshot. A runtime that does not support snapshots MAY ignore `snapshot` when the capability is not declared.
+
+### `secrets`
+
+An array of secret names, at least one, no duplicates. Each name matches `^[A-Z][A-Z0-9_]{0,127}$`, for example `DEPLOY_TOKEN`. A manifest MUST NOT contain secret values.
+
+A manifest that lists `secrets` MUST declare `read_secrets`. A runtime MUST refuse to start an agent that declares `read_secrets` if it cannot provide every named secret, and MUST NOT expose secrets that are not named. How the runtime stores and injects secrets (for example as environment variables) is up to the runtime.
+
+Secrets access is a capability rather than a field alone so that runtimes without a secret store refuse the manifest through the normal capability check ([runtime capability document](runtime.md)).
 
 ## Unknown fields
 
