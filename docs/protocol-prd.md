@@ -31,4 +31,4 @@ Out of scope: the runtime itself, authentication, billing and scheduling.
 
 ## Open questions
 
-- Whether secrets access needs its own capability.
+None open. Settled in v0.4.0: runtimes advertise support in a [runtime capability document](runtime.md); secrets access is the `read_secrets` capability with a `secrets` field ([spec](spec.md#secrets)).

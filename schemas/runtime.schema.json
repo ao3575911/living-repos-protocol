@@ -43,7 +43,8 @@
           "publish_state",
           "open_pull_requests",
           "snapshot_restore",
-          "handoff"
+          "handoff",
+          "read_secrets"
         ],
         "description": "A manifest agent_capabilities value."
       },
