@@ -4,6 +4,15 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+### Added
+
+- Frozen copies of the schemas at every release tag on the docs site, at `/schemas/<tag>/` ([#18](https://github.com/ao3575911/living-repos-protocol/issues/18)).
+- Invalid fixture: webhook target without `url` ([#21](https://github.com/ao3575911/living-repos-protocol/issues/21)).
+
+### Changed
+
+- The strict schema's `$id` is now the versioned docs-site URL of the latest release; the self-test checks it against `CHANGELOG.md`.
+
 ## [0.3.0] - 2026-10-25
 
 Defines protocol version `v0.3.0`. Additive over v0.2.1: every manifest valid under v0.1.0, v0.2.0 or v0.2.1 still validates in lenient mode.

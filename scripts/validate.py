@@ -67,6 +67,12 @@ def self_test():
     for m in missing:
         print(f"FAIL no description: {m}")
     ok = not missing
+    import re
+    m = re.search(r"^## \[(\d+\.\d+\.\d+)\]", (ROOT / "CHANGELOG.md").read_text(), re.M)
+    want = f"https://ao3575911.github.io/living-repos-protocol/schemas/v{m.group(1)}/manifest.schema.json"
+    id_ok = STRICT.schema.get("$id") == want
+    ok &= id_ok
+    print(("ok   " if id_ok else f"FAIL want {want}, got ") + f"$id {STRICT.schema.get('$id')}")
     for p in files("examples/*.yaml") + files("tests/valid/*.yaml"):
         e, w = check(p, strict=True)
         ok &= not e

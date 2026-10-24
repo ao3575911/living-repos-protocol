@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://raw.githubusercontent.com/ao3575911/living-repos-protocol/main/schemas/manifest.schema.json",
+  "$id": "https://ao3575911.github.io/living-repos-protocol/schemas/v0.3.0/manifest.schema.json",
   "title": "Living Repository Manifest",
   "description": "Manifest at .living/manifest.yaml. Defined in docs/spec.md.",
   "type": "object",

@@ -32,7 +32,15 @@ Until 1.0 the protocol is a draft. Breaking changes bump the minor version and a
 - The schema is the source of truth for validation; the spec is the source of truth for meaning.
 - Every rule in the schema has at least one invalid fixture in `tests/invalid/`.
 
+## Schema URLs
+
+Every release tag has a frozen copy of the schemas on the docs site:
+
+- `https://ao3575911.github.io/living-repos-protocol/schemas/<tag>/manifest.schema.json` (strict)
+- `https://ao3575911.github.io/living-repos-protocol/schemas/<tag>/manifest.lenient.schema.json` (lenient, from v0.2.1)
+
+These files never change once published. `https://ao3575911.github.io/living-repos-protocol/schemas/manifest.schema.json` always tracks `main`. The strict schema's `$id` is the URL for the latest release; CI checks that it matches the newest version in `CHANGELOG.md`.
+
 ## Open questions
 
 - Whether runtimes should accept manifests that target an older minor version than they implement.
-- Whether to publish the schema at a stable URL per protocol version.
