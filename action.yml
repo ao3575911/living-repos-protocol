@@ -7,6 +7,9 @@ inputs:
   manifests:
     description: Space-separated paths or glob patterns of manifests to validate.
     default: .living/manifest.yaml
+  strict:
+    description: "true to fail on unknown fields and values outside the allowed sets. Default false: these are warnings."
+    default: "false"
 runs:
   using: composite
   steps:
@@ -18,6 +21,9 @@ runs:
     - shell: bash
       env:
         MANIFESTS: ${{ inputs.manifests }}
+        STRICT: ${{ inputs.strict }}
       run: |
         set -f
-        python "$GITHUB_ACTION_PATH/scripts/validate.py" $MANIFESTS
+        flag=""
+        if [ "$STRICT" = "true" ]; then flag="--strict"; fi
+        python "$GITHUB_ACTION_PATH/scripts/validate.py" $flag $MANIFESTS

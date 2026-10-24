@@ -23,3 +23,8 @@ jobs:
         uses: ./
         with:
           manifests: "examples/*.yaml tests/valid/*.yaml"
+          strict: "true"
+      - name: Action self-test, lenient mode accepts v0.1.0 manifests
+        uses: ./
+        with:
+          manifests: "tests/compat/*.yaml"

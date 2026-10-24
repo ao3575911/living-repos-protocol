@@ -1,0 +1,6 @@
+protocol_version: v0.1.0-draft
+project_id: template-example
+agent_capabilities: [run_tasks, publish_state]
+isolation_profile: dedicated-vm
+state_publication: { target: control-process }
+logging_requirements: { structured: true }
