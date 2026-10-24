@@ -25,6 +25,7 @@ def load(name):
 
 LENIENT = load("manifest.lenient.schema.json")
 STRICT = load("manifest.schema.json")
+RUNTIME = load("runtime.schema.json")
 
 
 def check(path, strict):
@@ -63,7 +64,7 @@ def undescribed(node, path="$"):
 
 
 def self_test():
-    missing = list(undescribed(STRICT.schema))
+    missing = list(undescribed(STRICT.schema)) + list(undescribed(RUNTIME.schema))
     for m in missing:
         print(f"FAIL no description: {m}")
     ok = not missing
@@ -88,6 +89,15 @@ def self_test():
         rejected = bool(check(p, strict=True)[0])
         ok &= rejected
         print(("ok   strict rejected " if rejected else "FAIL strict accepted ") + p)
+    import match
+    for d in files("tests/runtime/*/"):
+        name = pathlib.Path(d).name
+        runtime, errors = match.load_runtime(pathlib.Path(d) / "runtime.yaml")
+        manifest_errors = check(str(pathlib.Path(d) / "manifest.yaml"), strict=True)[0]
+        problems = [] if errors else match.mismatches(runtime, yaml.safe_load((pathlib.Path(d) / "manifest.yaml").read_text()))
+        good = not errors and not manifest_errors and (not problems) == name.startswith("match")
+        ok &= good
+        print(("ok   " if good else "FAIL ") + f"runtime {'match' if not problems else 'mismatch'} {d}" + "".join(f"\n     {e}" for e in errors + manifest_errors))
     return ok
 
 

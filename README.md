@@ -75,6 +75,7 @@ Docs site: [https://ao3575911.github.io/living-repos-protocol/](https://ao357591
 - [Specification](docs/spec.md)
 - [Protocol PRD](docs/protocol-prd.md)
 - [Versioning](docs/versioning.md)
+- [Runtime capability document](docs/runtime.md)
 - [Manifest schema](schemas/manifest.schema.json)
 
 ## Status

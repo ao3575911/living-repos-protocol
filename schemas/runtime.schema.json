@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ao3575911.github.io/living-repos-protocol/schemas/runtime.schema.json",
+  "title": "Living Repository Runtime Capability Document",
+  "description": "What a runtime supports. Defined in docs/runtime.md.",
+  "type": "object",
+  "required": [
+    "runtime",
+    "protocol_versions",
+    "agent_capabilities",
+    "isolation_profiles",
+    "state_publication_targets"
+  ],
+  "additionalProperties": false,
+  "patternProperties": {
+    "^x-": {
+      "description": "Extension field. Consumers that do not understand it must ignore it."
+    }
+  },
+  "properties": {
+    "runtime": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Name of the runtime, for example example-runtime."
+    },
+    "protocol_versions": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^v\\d+\\.\\d+$",
+        "description": "Protocol MAJOR.MINOR, for example v0.3."
+      },
+      "description": "Protocol versions the runtime implements, as vMAJOR.MINOR."
+    },
+    "agent_capabilities": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "run_tasks",
+          "publish_state",
+          "open_pull_requests",
+          "snapshot_restore",
+          "handoff"
+        ],
+        "description": "A manifest agent_capabilities value."
+      },
+      "description": "Capabilities the runtime supports."
+    },
+    "isolation_profiles": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "dedicated-vm",
+          "container",
+          "sandbox-process"
+        ],
+        "description": "A manifest isolation_profile value."
+      },
+      "description": "Isolation profiles the runtime can provide."
+    },
+    "state_publication_targets": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "control-process",
+          "file",
+          "webhook"
+        ],
+        "description": "A manifest state_publication.target value."
+      },
+      "description": "State publication targets the runtime accepts."
+    }
+  }
+}

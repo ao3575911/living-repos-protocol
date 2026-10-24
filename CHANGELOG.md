@@ -6,6 +6,7 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ### Added
 
+- Runtime capability document: `docs/runtime.md`, `schemas/runtime.schema.json`, the reference check `scripts/match.py` and fixtures in `tests/runtime/` ([#17](https://github.com/ao3575911/living-repos-protocol/issues/17)).
 - Frozen copies of the schemas at every release tag on the docs site, at `/schemas/<tag>/` ([#18](https://github.com/ao3575911/living-repos-protocol/issues/18)).
 - Invalid fixture: webhook target without `url` ([#21](https://github.com/ao3575911/living-repos-protocol/issues/21)).
 
