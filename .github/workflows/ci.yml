@@ -19,3 +19,7 @@ jobs:
       - run: pip install -r requirements-ci.txt
       - run: test -f schemas/manifest.schema.json
       - run: python scripts/validate.py
+      - name: Action self-test
+        uses: ./
+        with:
+          manifests: "examples/*.yaml tests/valid/*.yaml"

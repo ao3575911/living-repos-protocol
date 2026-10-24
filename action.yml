@@ -1,0 +1,23 @@
+name: Validate Living Repository manifest
+description: Validate .living/manifest.yaml files against the Living Repositories Protocol schema.
+branding:
+  icon: check-circle
+  color: green
+inputs:
+  manifests:
+    description: Space-separated paths or glob patterns of manifests to validate.
+    default: .living/manifest.yaml
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v7.1.0
+      with:
+        python-version: "3.12"
+    - shell: bash
+      run: pip install --quiet -r "$GITHUB_ACTION_PATH/requirements-ci.txt"
+    - shell: bash
+      env:
+        MANIFESTS: ${{ inputs.manifests }}
+      run: |
+        set -f
+        python "$GITHUB_ACTION_PATH/scripts/validate.py" $MANIFESTS
