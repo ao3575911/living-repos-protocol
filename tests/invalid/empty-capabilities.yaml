@@ -1,0 +1,6 @@
+protocol_version: v0.1.0-draft
+project_id: demo
+agent_capabilities: []
+isolation_profile: container
+state_publication: { target: control-process }
+logging_requirements: { structured: true }
