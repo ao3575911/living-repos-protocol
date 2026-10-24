@@ -1,0 +1,23 @@
+# Repository labels. Synced by .github/workflows/labels.yml on push to main.
+- { name: "type: bug", color: "d73a4a", description: "Something does not work as documented" }
+- { name: "type: feature", color: "a2eeef", description: "New capability or addition" }
+- { name: "type: docs", color: "0075ca", description: "Documentation only" }
+- { name: "type: spec", color: "5319e7", description: "Change to the protocol specification or schema" }
+- { name: "type: chore", color: "cfd3d7", description: "Maintenance, CI or tooling" }
+- { name: "area: schema", color: "fbca04", description: "JSON Schema and validator" }
+- { name: "area: examples", color: "fbca04", description: "Example repositories and demos" }
+- { name: "area: ci", color: "fbca04", description: "Workflows and automation" }
+- { name: "area: docs-site", color: "fbca04", description: "GitHub Pages documentation" }
+- { name: "priority: high", color: "b60205", description: "Blocks adoption or a release" }
+- { name: "priority: medium", color: "d93f0b", description: "Planned for the next release" }
+- { name: "priority: low", color: "0e8a16", description: "Nice to have" }
+- { name: "status: needs-triage", color: "ededed", description: "Not yet reviewed" }
+- { name: "status: accepted", color: "0e8a16", description: "Agreed and ready to work on" }
+- { name: "status: blocked", color: "000000", description: "Waiting on something else" }
+- { name: "good first issue", color: "7057ff", description: "Small, well-scoped, good for newcomers" }
+- { name: "help wanted", color: "008672", description: "Contributions welcome" }
+- { name: "dependencies", color: "0366d6", description: "Dependency updates" }
+- { name: "github_actions", color: "000000", description: "GitHub Actions updates" }
+- { name: "python", color: "2b67c6", description: "Python dependency updates" }
+- { name: "bug", color: "d73a4a", description: "Applied by the bug report form" }
+- { name: "enhancement", color: "a2eeef", description: "Applied by the feature request form" }
