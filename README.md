@@ -18,7 +18,8 @@ Validate a manifest against the schema:
 git clone https://github.com/ao3575911/living-repos-protocol
 cd living-repos-protocol
 pip install -r requirements-ci.txt
-python scripts/validate.py examples/manifest.yaml
+python scripts/validate.py examples/manifest.yaml           # lenient
+python scripts/validate.py --strict examples/manifest.yaml  # every spec rule
 ```
 
 ## GitHub Action
@@ -27,12 +28,12 @@ Validate a repository's manifest in CI:
 
 ```yaml
 - uses: actions/checkout@v7.0.1
-- uses: ao3575911/living-repos-protocol@v0.2.0
+- uses: ao3575911/living-repos-protocol@v0.2.1
   with:
     manifests: .living/manifest.yaml
 ```
 
-`manifests` takes space-separated paths or glob patterns. The job fails if any manifest is invalid.
+`manifests` takes space-separated paths or glob patterns. By default the job fails only on manifests that break the v0.1.0 rules; unknown fields and values outside the allowed sets are warnings. Set `strict: "true"` to fail on those as well.
 
 ## Docs
 

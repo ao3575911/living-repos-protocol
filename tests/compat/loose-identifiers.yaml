@@ -1,0 +1,6 @@
+protocol_version: draft-1
+project_id: My_Project
+agent_capabilities: [run_tasks, run_tasks]
+isolation_profile: container
+state_publication: { target: file }
+logging_requirements: { structured: true }

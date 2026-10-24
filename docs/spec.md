@@ -45,7 +45,12 @@ A runtime MUST refuse to start an agent that declares a capability it does not s
 
 ## Unknown fields
 
-A manifest MUST NOT contain fields not listed here, at the top level or inside the nested objects. The one exception is extension fields: top-level keys starting with `x-` MAY appear and MUST be ignored by runtimes that do not understand them. Validators MUST reject any other unknown field.
+A manifest MUST NOT contain fields not listed here, at the top level or inside the nested objects. The one exception is extension fields: top-level keys starting with `x-` MAY appear and MUST be ignored by runtimes that do not understand them. Validators MUST report any other unknown field.
+
+## Validation modes
+
+- **Lenient (default):** a manifest fails only if it breaks the v0.1.0 rules ([`manifest.lenient.schema.json`](../schemas/manifest.lenient.schema.json): required fields and basic types). Unknown fields, values outside the allowed sets and pattern mismatches are reported as warnings. Every manifest valid under v0.1.0 passes.
+- **Strict (`--strict`):** every rule in this document is enforced ([`manifest.schema.json`](../schemas/manifest.schema.json)), and the warnings above become errors. New manifests SHOULD pass strict mode.
 
 ## Annotated example
 
