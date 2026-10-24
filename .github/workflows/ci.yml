@@ -1,0 +1,21 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - uses: DavidAnson/markdownlint-cli2-action@v19.1.0
+        with:
+          globs: "**/*.md"
+      - uses: actions/setup-python@v5.6.0
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements-ci.txt
+      - run: test -f schemas/manifest.schema.json
+      - run: python scripts/validate.py

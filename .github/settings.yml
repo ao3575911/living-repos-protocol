@@ -1,0 +1,12 @@
+repository:
+  name: living-repos-protocol
+  homepage: https://github.com/ao3575911/living-repos-protocol#readme
+  private: false
+  has_wiki: false
+  has_projects: false
+  has_issues: true
+  allow_squash_merge: true
+  allow_merge_commit: false
+  allow_rebase_merge: false
+  allow_update_branch: true
+  delete_branch_on_merge: true
