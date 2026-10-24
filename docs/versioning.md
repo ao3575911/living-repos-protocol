@@ -34,7 +34,7 @@ Until 1.0 the protocol is a draft. Breaking changes bump the minor version and a
 
 ## Older manifests
 
-A runtime that implements protocol `vX.Y` MUST accept a manifest whose `protocol_version` has the same major version `X` and a minor version at or below `Y`, for example a `v0.3` runtime accepts `v0.1.0-draft`, `v0.2.0` and `v0.3.0` manifests. It MUST refuse a manifest with a newer minor or a different major version. Pre-release and patch parts are ignored for this rule.
+A runtime that implements protocol `vX.Y` MUST accept a manifest whose `protocol_version` has the same major version `X` and a minor version at or below `Y`, for example a `v0.4` runtime accepts `v0.1.0-draft` through `v0.4.0` manifests. It MUST refuse a manifest with a newer minor or a different major version. Pre-release and patch parts are ignored for this rule.
 
 This holds before 1.0 too: every minor release so far only added optional fields and values, and the lenient schema keeps v0.1.0 manifests valid. If a future minor release is breaking, its CHANGELOG entry will say which older manifests stop being accepted.
 
