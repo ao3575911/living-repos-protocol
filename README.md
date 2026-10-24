@@ -4,7 +4,9 @@ Canonical protocol/specification repository for Living Repositories.
 A manifest that declares what a repository's cloud agent may do, how it is isolated and where it reports state, with a schema and a validator to enforce it.
 Initial target: `v0.1.0-draft`
 
+<!-- BEGIN GENERATED: badges -->
 [![CI](https://github.com/ao3575911/living-repos-protocol/actions/workflows/ci.yml/badge.svg)](https://github.com/ao3575911/living-repos-protocol/actions/workflows/ci.yml) [![Release](https://img.shields.io/github/v/release/ao3575911/living-repos-protocol)](https://github.com/ao3575911/living-repos-protocol/releases) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+<!-- END GENERATED: badges -->
 
 ![Living Repositories Protocol](docs/social-preview.png)
 
@@ -23,6 +25,26 @@ pip install -r requirements-ci.txt
 python scripts/validate.py examples/manifest.yaml           # lenient
 python scripts/validate.py --strict examples/manifest.yaml  # every spec rule
 ```
+
+## Manifest fields
+
+<!-- BEGIN GENERATED: fields -->
+| Field | Type | Required | Allowed | Description |
+| --- | --- | --- | --- | --- |
+| `protocol_version` | string | yes | pattern `^v\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?$` | Protocol version the manifest targets: v followed by SemVer, for example v0.1.0-draft. |
+| `project_id` | string | yes | pattern `^[a-z0-9][a-z0-9-]{0,62}$` | Stable repository identifier: lowercase letters, digits and hyphens, at most 63 characters. |
+| `agent_capabilities` | array of strings | yes | `run_tasks`, `publish_state`, `open_pull_requests`, `snapshot_restore`, `handoff` | What the agent may do. A runtime must refuse to start an agent that declares a capability it does not support. |
+| `isolation_profile` | string | yes | `dedicated-vm`, `container`, `sandbox-process` | How the runtime isolates the agent. |
+| `state_publication` | object | yes | - | Where the agent publishes its state. |
+| `state_publication.target` | string | yes | `control-process`, `file`, `webhook` | control-process, file or webhook. |
+| `state_publication.path` | string | no | - | State file path relative to the repository root. Required when target is file. |
+| `state_publication.url` | string | no | pattern `^https://` | https URL that receives state. Required when target is webhook. |
+| `logging_requirements` | object | yes | - | How the agent logs. |
+| `logging_requirements.structured` | boolean | yes | - | true means one JSON object per log line. |
+| `logging_requirements.level` | string | no | `debug`, `info`, `warn`, `error` | Minimum log level. Default info. |
+
+Generated from [`schemas/manifest.schema.json`](schemas/manifest.schema.json) by `scripts/gen_readme.py`. Top-level keys starting with `x-` are allowed as extensions.
+<!-- END GENERATED: fields -->
 
 ## GitHub Action
 

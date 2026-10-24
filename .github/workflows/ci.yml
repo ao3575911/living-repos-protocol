@@ -17,6 +17,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r requirements-ci.txt
+      - run: python scripts/gen_readme.py --check
       - run: test -f schemas/manifest.schema.json
       - run: python scripts/validate.py
       - name: Action self-test
