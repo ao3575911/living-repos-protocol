@@ -1,0 +1,10 @@
+title: Living Repositories Protocol
+description: Manifest specification and JSON Schema for repositories that bring their own cloud agent.
+theme: jekyll-theme-primer
+plugins:
+  - jekyll-relative-links
+relative_links:
+  enabled: true
+  collections: false
+exclude:
+  - social-preview.png

@@ -1,7 +1,7 @@
 """Regenerate the README sections between BEGIN/END GENERATED markers.
 
 Sources: schemas/manifest.schema.json (field table) and the repository
-name (badges). Run with --check to fail if README.md is out of date.
+name (badges). Also renders the same markers in docs/schema-reference.md. Run with --check to fail on drift.
 """
 import json, pathlib, re, sys
 
@@ -58,12 +58,18 @@ def render(text):
     return text
 
 
-readme = ROOT / "README.md"
-current = readme.read_text()
-new = render(current)
-if "--check" in sys.argv:
-    if new != current:
-        sys.exit("README.md is out of date. Run: python scripts/gen_readme.py")
-    print("ok README.md up to date")
-else:
-    readme.write_text(new)
+TARGETS = ["README.md", "docs/schema-reference.md"]
+stale = []
+for name in TARGETS:
+    path = ROOT / name
+    current = path.read_text()
+    new = render(current)
+    if new == current:
+        continue
+    if "--check" in sys.argv:
+        stale.append(name)
+    else:
+        path.write_text(new)
+if stale:
+    sys.exit(f"Out of date: {', '.join(stale)}. Run: python scripts/gen_readme.py")
+print("ok generated sections up to date")
