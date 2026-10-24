@@ -4,8 +4,21 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-10-25
+
+Defines protocol version `v0.3.0`. Additive over v0.2.1: every manifest valid under v0.1.0, v0.2.0 or v0.2.1 still validates in lenient mode.
+
 ### Added
 - Optional `snapshot` field (`paths`, `retention_days`) for agents that declare `snapshot_restore`, with spec text, strict schema rules, one valid and four invalid fixtures. Lenient validation is unchanged, so every v0.2.1 manifest still passes.
+- Every strict schema field has a description; the self-test fails if one is missing.
+- `scripts/gen_readme.py` generates README badges, the manifest field table and the docs schema reference from the schema. CI fails on drift.
+- GitHub Pages site: <https://ao3575911.github.io/living-repos-protocol/>, with the spec, schema reference, versioning policy and raw schemas.
+- STRATEGY.md (problem, audience, non-goals, alternatives, principles) and AGENTS.md.
+- Labels as code with a sync workflow, a Spec change (RFC) issue form, and a manually triggered Release Please workflow that proposes the next version without tagging.
+
+### Changed
+- Copilot review instructions point at AGENTS.md and list the changes to block.
+- Bug and feature forms apply type and triage labels.
 
 ## [0.2.1] - 2026-10-25
 
