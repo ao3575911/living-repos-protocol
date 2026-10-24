@@ -79,7 +79,7 @@ Docs site: [https://ao3575911.github.io/living-repos-protocol/](https://ao357591
 
 ## Status
 
-Draft. Protocol version `v0.1.0-draft`; repository release v0.1.0.
+Draft. Protocol version `v0.3.0`; repository release v0.3.0. Strict mode enforces every rule in the spec; the default lenient mode accepts every manifest valid under v0.1.0. `tests/` holds the conformance fixtures.
 
 ## Related
 
