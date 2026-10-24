@@ -24,7 +24,7 @@ Top-level keys starting with `x-` are extensions and MUST be ignored by consumer
 
 A runtime supports a manifest when all of these hold:
 
-1. The manifest's `protocol_version`, reduced to `vMAJOR.MINOR`, is accepted under the rules in [Versioning](versioning.md).
+1. The manifest's `protocol_version`, reduced to `vMAJOR.MINOR`, has the same major version as an entry in `protocol_versions` and a minor version at or below it (see [Versioning](versioning.md#older-manifests)).
 2. Every value in the manifest's `agent_capabilities` is in the document's `agent_capabilities`.
 3. The manifest's `isolation_profile` is in `isolation_profiles`.
 4. The manifest's `state_publication.target` is in `state_publication_targets`.

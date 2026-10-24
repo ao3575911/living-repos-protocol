@@ -22,9 +22,10 @@ def minor(version):
 def mismatches(runtime, manifest):
     out = []
     want = minor(manifest.get("protocol_version"))
-    have = {minor(v) for v in runtime["protocol_versions"]}
-    if want not in have:
-        out.append(f"protocol_version {manifest.get('protocol_version')} not in {runtime['protocol_versions']}")
+    have = [minor(v) for v in runtime["protocol_versions"]]
+    # Same major, minor at or below the newest implemented minor (docs/versioning.md).
+    if want is None or not any(h[0] == want[0] and h[1] >= want[1] for h in have):
+        out.append(f"protocol_version {manifest.get('protocol_version')} is newer than or outside {runtime['protocol_versions']}")
     for cap in manifest.get("agent_capabilities", []):
         if cap not in runtime["agent_capabilities"]:
             out.append(f"capability {cap} not supported")

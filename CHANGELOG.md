@@ -12,6 +12,7 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ### Changed
 
+- Runtimes accept manifests that target an older minor version of the same major version, and refuse newer ones; documented in `docs/versioning.md` with a fixture pair ([#20](https://github.com/ao3575911/living-repos-protocol/issues/20)).
 - The strict schema's `$id` is now the versioned docs-site URL of the latest release; the self-test checks it against `CHANGELOG.md`.
 
 ## [0.3.0] - 2026-10-25
