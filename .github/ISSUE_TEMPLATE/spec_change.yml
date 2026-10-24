@@ -1,0 +1,37 @@
+name: Spec change (RFC)
+description: Propose a change to the manifest format, schema or validation rules.
+title: "RFC: "
+labels: ["type: spec", "status: needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: Read docs/versioning.md first. Changes that would fail a manifest valid under an earlier release must arrive behind strict mode.
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: The real repository or runtime that needs this, and what it cannot do today.
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: Proposed change
+      description: Fields, types, allowed values and an example manifest.
+      render: yaml
+    validations:
+      required: true
+  - type: dropdown
+    id: compat
+    attributes:
+      label: Compatibility
+      options:
+        - Additive (optional field or new allowed value)
+        - Strict-only (new warning in lenient mode)
+        - Breaking
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered

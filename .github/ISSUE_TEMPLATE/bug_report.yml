@@ -1,6 +1,6 @@
 name: Bug report
 description: Something does not work as documented.
-labels: [bug]
+labels: ["type: bug", "status: needs-triage"]
 body:
   - type: textarea
     id: what
@@ -13,3 +13,9 @@ body:
     id: version
     attributes:
       label: Version or commit
+  - type: textarea
+    id: manifest
+    attributes:
+      label: Manifest
+      description: The manifest involved, if any. Remove anything private.
+      render: yaml
