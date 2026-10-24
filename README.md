@@ -21,6 +21,19 @@ pip install -r requirements-ci.txt
 python scripts/validate.py examples/manifest.yaml
 ```
 
+## GitHub Action
+
+Validate a repository's manifest in CI:
+
+```yaml
+- uses: actions/checkout@v7.0.1
+- uses: ao3575911/living-repos-protocol@v0.2.0
+  with:
+    manifests: .living/manifest.yaml
+```
+
+`manifests` takes space-separated paths or glob patterns. The job fails if any manifest is invalid.
+
 ## Docs
 
 - [Specification](docs/spec.md)
