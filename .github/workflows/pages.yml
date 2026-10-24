@@ -1,0 +1,39 @@
+name: Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/configure-pages@v6.0.0
+      - name: Stage site
+        run: |
+          mkdir -p _site_src
+          cp -r docs/. _site_src/
+          if [ -d schemas ]; then cp -r schemas _site_src/schemas; fi
+          if [ -d examples ]; then cp -r examples _site_src/examples; fi
+      - uses: actions/jekyll-build-pages@v1.0.13
+        with:
+          source: ./_site_src
+          destination: ./_site
+      - uses: actions/upload-pages-artifact@v5.0.0
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5.0.1

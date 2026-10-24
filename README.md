@@ -61,6 +61,8 @@ Validate a repository's manifest in CI:
 
 ## Docs
 
+Docs site: [https://ao3575911.github.io/living-repos-protocol/](https://ao3575911.github.io/living-repos-protocol/)
+
 - [Strategy](STRATEGY.md): problem, audience, non-goals and alternatives
 
 - [Specification](docs/spec.md)
