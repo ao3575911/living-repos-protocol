@@ -1,0 +1,7 @@
+protocol_version: v0.2.0
+project_id: webhook
+agent_capabilities: [open_pull_requests, handoff]
+isolation_profile: sandbox-process
+state_publication: { target: webhook, url: "https://example.com/state" }
+logging_requirements: { structured: false }
+x-team: platform

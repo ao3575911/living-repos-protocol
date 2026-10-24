@@ -1,0 +1,6 @@
+protocol_version: v0.2.0
+project_id: file-target
+agent_capabilities: [run_tasks, publish_state, snapshot_restore]
+isolation_profile: dedicated-vm
+state_publication: { target: file, path: .living/state.json }
+logging_requirements: { structured: true, level: debug }
