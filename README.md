@@ -59,7 +59,7 @@ Validate a repository's manifest in CI:
 
 ```yaml
 - uses: actions/checkout@v7.0.1
-- uses: ao3575911/living-repos-protocol@v0.2.1
+- uses: ao3575911/living-repos-protocol@v0.3.0
   with:
     manifests: .living/manifest.yaml
 ```
