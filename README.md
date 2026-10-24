@@ -1,5 +1,7 @@
 # Living Repositories Protocol
 Canonical protocol/specification repository for Living Repositories.
+
+A manifest that declares what a repository's cloud agent may do, how it is isolated and where it reports state, with a schema and a validator to enforce it.
 Initial target: `v0.1.0-draft`
 
 [![CI](https://github.com/ao3575911/living-repos-protocol/actions/workflows/ci.yml/badge.svg)](https://github.com/ao3575911/living-repos-protocol/actions/workflows/ci.yml) [![Release](https://img.shields.io/github/v/release/ao3575911/living-repos-protocol)](https://github.com/ao3575911/living-repos-protocol/releases) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -36,6 +38,8 @@ Validate a repository's manifest in CI:
 `manifests` takes space-separated paths or glob patterns. By default the job fails only on manifests that break the v0.1.0 rules; unknown fields and values outside the allowed sets are warnings. Set `strict: "true"` to fail on those as well.
 
 ## Docs
+
+- [Strategy](STRATEGY.md): problem, audience, non-goals and alternatives
 
 - [Specification](docs/spec.md)
 - [Protocol PRD](docs/protocol-prd.md)
