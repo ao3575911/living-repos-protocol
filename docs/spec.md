@@ -18,6 +18,12 @@ The key words MUST, MUST NOT, SHOULD and MAY are used as described in RFC 2119.
 | `state_publication` | object | yes | Where the agent publishes its state. See below. |
 | `logging_requirements` | object | yes | How the agent logs. See below. |
 
+### Optional fields
+
+| Field | Type | Rule |
+| --- | --- | --- |
+| `snapshot` | object | What the runtime snapshots when the agent declares `snapshot_restore`. Added in release v0.3.0. See below. |
+
 ### `agent_capabilities` values
 
 - `run_tasks`: the agent runs tasks in the repository.
@@ -42,6 +48,15 @@ A runtime MUST refuse to start an agent that declares a capability it does not s
 | --- | --- | --- | --- |
 | `structured` | boolean | yes | `true` means one JSON object per log line. |
 | `level` | string | no | One of `debug`, `info`, `warn`, `error`. Default `info`. |
+
+### `snapshot`
+
+| Key | Type | Required | Rule |
+| --- | --- | --- | --- |
+| `paths` | array of strings | yes | At least one entry, no duplicates. Each a path relative to the repository root, not starting with `/` and without `..`. |
+| `retention_days` | integer | no | At least 1. Default 7. |
+
+A manifest that declares `snapshot_restore` SHOULD include `snapshot`. Without it, the runtime decides what to snapshot. A runtime that does not support snapshots MAY ignore `snapshot` when the capability is not declared.
 
 ## Unknown fields
 

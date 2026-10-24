@@ -45,6 +45,9 @@ python scripts/validate.py --strict examples/manifest.yaml  # every spec rule
 | `logging_requirements` | object | yes | - | How the agent logs. |
 | `logging_requirements.structured` | boolean | yes | - | true means one JSON object per log line. |
 | `logging_requirements.level` | string | no | `debug`, `info`, `warn`, `error` | Minimum log level. Default info. |
+| `snapshot` | object | no | - | What the runtime snapshots and how long it keeps snapshots. Used with the snapshot_restore capability. Optional. |
+| `snapshot.paths` | array of strings | yes | - | Paths relative to the repository root to include in each snapshot. |
+| `snapshot.retention_days` | integer | no | - | Days to keep each snapshot. Default 7. |
 
 Generated from [`schemas/manifest.schema.json`](schemas/manifest.schema.json) by `scripts/gen_readme.py`. Top-level keys starting with `x-` are allowed as extensions.
 
