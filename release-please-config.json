@@ -1,0 +1,8 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "release-type": "simple",
+  "skip-changelog": true,
+  "skip-github-release": true,
+  "include-v-in-tag": true,
+  "packages": { ".": {} }
+}
