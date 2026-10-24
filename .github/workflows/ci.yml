@@ -13,7 +13,7 @@ jobs:
       - uses: DavidAnson/markdownlint-cli2-action@v19.1.0
         with:
           globs: "**/*.md"
-      - uses: actions/setup-python@v5.6.0
+      - uses: actions/setup-python@v7.1.0
         with:
           python-version: "3.12"
       - run: pip install -r requirements-ci.txt
