@@ -47,4 +47,4 @@ Every release tag has a frozen copy of the schemas on the docs site:
 - `https://ao3575911.github.io/living-repos-protocol/schemas/<tag>/manifest.schema.json` (strict)
 - `https://ao3575911.github.io/living-repos-protocol/schemas/<tag>/manifest.lenient.schema.json` (lenient, from v0.2.1)
 
-These files never change once published. `https://ao3575911.github.io/living-repos-protocol/schemas/manifest.schema.json` always tracks `main`. The strict schema's `$id` is the URL for the latest release; CI checks that it matches the newest version in `CHANGELOG.md`.
+These files never change once published. `https://ao3575911.github.io/living-repos-protocol/schemas/manifest.schema.json` always tracks `main`. The `$id` of each schema with a frozen copy (`manifest.schema.json`, and `runtime.schema.json` from v0.4.0) is the URL for the latest release; CI checks that it matches the newest version in `CHANGELOG.md`. The lenient schema keeps its v0.1.0 content unchanged.

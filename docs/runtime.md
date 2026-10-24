@@ -4,7 +4,7 @@ A runtime publishes a capability document that lists what it supports. Tools com
 
 ## Format and location
 
-- YAML or JSON, validated by [`runtime.schema.json`](schemas/runtime.schema.json).
+- YAML or JSON, validated by [`runtime.schema.json`](https://github.com/ao3575911/living-repos-protocol/blob/main/schemas/runtime.schema.json).
 - A runtime SHOULD ship the document with its distribution and SHOULD state where it is in its own docs.
 - A runtime that serves HTTP MAY serve it at `/.well-known/living-repos-runtime.json`.
 
@@ -37,7 +37,7 @@ A runtime MUST refuse to start an agent when any rule fails, and SHOULD report e
 python scripts/match.py runtime.yaml .living/manifest.yaml
 ```
 
-It exits 0 on a match and 1 otherwise, printing one line per failing rule. Fixtures are in `tests/runtime/`: a directory named `match*` must match; any other directory must not.
+It exits 0 on a match and 1 otherwise, printing one line per failing rule. It checks the runtime document against the schema but not the manifest; validate the manifest first with `scripts/validate.py --strict`. Whether a runtime can provide the secrets named in a manifest's `secrets` field is outside this document; the runtime checks that when it starts the agent ([spec](spec.md#secrets)). Fixtures are in `tests/runtime/`: a directory named `match*` must match; any other directory must not.
 
 ## Example
 

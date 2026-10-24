@@ -17,7 +17,7 @@ One small manifest, `.living/manifest.yaml`, that any compliant runtime can read
 
 ## Scope for v0.x
 
-- The manifest format: [spec](spec.md) and [schema](../schemas/manifest.schema.json).
+- The manifest format: [spec](spec.md) and [schema](https://github.com/ao3575911/living-repos-protocol/blob/main/schemas/manifest.schema.json).
 - Conformance fixtures that any validator can run.
 - A GitHub Action that validates manifests in CI.
 

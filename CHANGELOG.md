@@ -16,6 +16,12 @@ All notable changes to this project are documented here. The format follows [Kee
 - Runtimes accept manifests that target an older minor version of the same major version, and refuse newer ones; documented in `docs/versioning.md` with a fixture pair ([#20](https://github.com/ao3575911/living-repos-protocol/issues/20)).
 - The strict schema's `$id` is now the versioned docs-site URL of the latest release; the self-test checks it against `CHANGELOG.md`.
 
+### Fixed
+
+- Links from `docs/` to `schemas/` were broken on the docs site; they now use absolute URLs. CI runs an offline link and anchor check (lychee).
+- Spec title no longer says "Draft v0.1.0".
+- Pages no longer triggers on tag pushes, which the `github-pages` environment refuses; the release steps in `CONTRIBUTING.md` run the Pages workflow after tagging instead. `runtime.schema.json` also gets a versioned `$id`, checked by the self-test.
+
 ## [0.3.0] - 2026-10-25
 
 Defines protocol version `v0.3.0`. Additive over v0.2.1: every manifest valid under v0.1.0, v0.2.0 or v0.2.1 still validates in lenient mode.

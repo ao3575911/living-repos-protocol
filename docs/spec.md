@@ -1,9 +1,9 @@
-# Protocol Spec (Draft v0.1.0)
+# Protocol Spec (draft)
 Required fields: protocol_version, project_id, agent_capabilities, isolation_profile, state_publication, logging_requirements.
 
 ## Scope
 
-This document defines the Living Repository manifest: a YAML file at `.living/manifest.yaml` in the repository root. A runtime reads it to decide how to start, isolate and observe the repository's agent. The machine-readable form is [`schemas/manifest.schema.json`](../schemas/manifest.schema.json). Where this document and the schema disagree, the schema is a bug and gets fixed.
+This document defines the Living Repository manifest: a YAML file at `.living/manifest.yaml` in the repository root. A runtime reads it to decide how to start, isolate and observe the repository's agent. The machine-readable form is [`schemas/manifest.schema.json`](https://github.com/ao3575911/living-repos-protocol/blob/main/schemas/manifest.schema.json). Where this document and the schema disagree, the schema is a bug and gets fixed.
 
 The key words MUST, MUST NOT, SHOULD and MAY are used as described in RFC 2119.
 
@@ -74,8 +74,8 @@ A manifest MUST NOT contain fields not listed here, at the top level or inside t
 
 ## Validation modes
 
-- **Lenient (default):** a manifest fails only if it breaks the v0.1.0 rules ([`manifest.lenient.schema.json`](../schemas/manifest.lenient.schema.json): required fields and basic types). Unknown fields, values outside the allowed sets and pattern mismatches are reported as warnings. Every manifest valid under v0.1.0 passes.
-- **Strict (`--strict`):** every rule in this document is enforced ([`manifest.schema.json`](../schemas/manifest.schema.json)), and the warnings above become errors. New manifests SHOULD pass strict mode.
+- **Lenient (default):** a manifest fails only if it breaks the v0.1.0 rules ([`manifest.lenient.schema.json`](https://github.com/ao3575911/living-repos-protocol/blob/main/schemas/manifest.lenient.schema.json): required fields and basic types). Unknown fields, values outside the allowed sets and pattern mismatches are reported as warnings. Every manifest valid under v0.1.0 passes.
+- **Strict (`--strict`):** every rule in this document is enforced ([`manifest.schema.json`](https://github.com/ao3575911/living-repos-protocol/blob/main/schemas/manifest.schema.json)), and the warnings above become errors. New manifests SHOULD pass strict mode.
 
 ## Annotated example
 
@@ -97,4 +97,4 @@ x-team: platform                   # extension field, ignored if unknown
 
 ## Versioning
 
-Changes to this document follow [versioning.md](versioning.md).
+Changes to this document follow [versioning.md](versioning.md). Each release's CHANGELOG entry states which protocol version it defines; fields added after v0.1.0 are marked with the release that added them.

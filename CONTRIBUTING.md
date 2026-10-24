@@ -11,4 +11,4 @@ Parts of README.md between `BEGIN GENERATED` and `END GENERATED` markers come fr
 
 ## Releases
 
-Run the Release Please workflow to open a PR with the next SemVer version from Conventional Commit titles. Before merging, move the CHANGELOG Unreleased entries under the new version. After merge, a maintainer tags the merge commit and publishes the release with the CHANGELOG notes.
+Run the Release Please workflow to open a PR with the next SemVer version from Conventional Commit titles. Before merging, move the CHANGELOG Unreleased entries under the new version. In the same PR, set the `$id` of `schemas/manifest.schema.json` and `schemas/runtime.schema.json` to the new version's URL (the self-test checks this). After merge, a maintainer tags the merge commit, publishes the release with the CHANGELOG notes, and runs the Pages workflow (`gh workflow run pages.yml`) so the frozen schemas appear at `/schemas/<tag>/`. Tag pushes do not deploy Pages because the `github-pages` environment only allows `main`.

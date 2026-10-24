@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://ao3575911.github.io/living-repos-protocol/schemas/runtime.schema.json",
+  "$id": "https://ao3575911.github.io/living-repos-protocol/schemas/v0.3.0/runtime.schema.json",
   "title": "Living Repository Runtime Capability Document",
   "description": "What a runtime supports. Defined in docs/runtime.md.",
   "type": "object",
