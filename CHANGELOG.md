@@ -4,6 +4,9 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
+### Added
+- Optional `snapshot` field (`paths`, `retention_days`) for agents that declare `snapshot_restore`, with spec text, strict schema rules, one valid and four invalid fixtures. Lenient validation is unchanged, so every v0.2.1 manifest still passes.
+
 ## [0.2.1] - 2026-10-25
 
 ### Fixed

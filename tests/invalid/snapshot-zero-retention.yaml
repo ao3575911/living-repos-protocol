@@ -1,0 +1,7 @@
+protocol_version: v0.3.0
+project_id: snapshot
+agent_capabilities: [run_tasks, snapshot_restore]
+isolation_profile: container
+state_publication: { target: control-process }
+logging_requirements: { structured: true }
+snapshot: { paths: [work/], retention_days: 0 }
