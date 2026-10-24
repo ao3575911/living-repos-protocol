@@ -54,7 +54,7 @@ SECTIONS = {"badges": badges, "fields": fields}
 def render(text):
     for name, fn in SECTIONS.items():
         text = re.sub(rf"(<!-- BEGIN GENERATED: {name} -->\n).*?(\n<!-- END GENERATED: {name} -->)",
-                      lambda m: m.group(1) + fn() + m.group(2), text, flags=re.S)
+                      lambda m: m.group(1) + "\n" + fn() + "\n" + m.group(2), text, flags=re.S)
     return text
 
 

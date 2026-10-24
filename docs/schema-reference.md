@@ -3,6 +3,7 @@
 Fields of `.living/manifest.yaml` as enforced in strict mode. Lenient mode (the default) checks only required fields and basic types; see [validation modes](spec.md#validation-modes).
 
 <!-- BEGIN GENERATED: fields -->
+
 | Field | Type | Required | Allowed | Description |
 | --- | --- | --- | --- | --- |
 | `protocol_version` | string | yes | pattern `^v\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?$` | Protocol version the manifest targets: v followed by SemVer, for example v0.1.0-draft. |
@@ -18,4 +19,5 @@ Fields of `.living/manifest.yaml` as enforced in strict mode. Lenient mode (the 
 | `logging_requirements.level` | string | no | `debug`, `info`, `warn`, `error` | Minimum log level. Default info. |
 
 Generated from [`schemas/manifest.schema.json`](schemas/manifest.schema.json) by `scripts/gen_readme.py`. Top-level keys starting with `x-` are allowed as extensions.
+
 <!-- END GENERATED: fields -->

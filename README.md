@@ -5,7 +5,9 @@ A manifest that declares what a repository's cloud agent may do, how it is isola
 Initial target: `v0.1.0-draft`
 
 <!-- BEGIN GENERATED: badges -->
+
 [![CI](https://github.com/ao3575911/living-repos-protocol/actions/workflows/ci.yml/badge.svg)](https://github.com/ao3575911/living-repos-protocol/actions/workflows/ci.yml) [![Release](https://img.shields.io/github/v/release/ao3575911/living-repos-protocol)](https://github.com/ao3575911/living-repos-protocol/releases) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 <!-- END GENERATED: badges -->
 
 ![Living Repositories Protocol](docs/social-preview.png)
@@ -29,6 +31,7 @@ python scripts/validate.py --strict examples/manifest.yaml  # every spec rule
 ## Manifest fields
 
 <!-- BEGIN GENERATED: fields -->
+
 | Field | Type | Required | Allowed | Description |
 | --- | --- | --- | --- | --- |
 | `protocol_version` | string | yes | pattern `^v\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?$` | Protocol version the manifest targets: v followed by SemVer, for example v0.1.0-draft. |
@@ -44,6 +47,7 @@ python scripts/validate.py --strict examples/manifest.yaml  # every spec rule
 | `logging_requirements.level` | string | no | `debug`, `info`, `warn`, `error` | Minimum log level. Default info. |
 
 Generated from [`schemas/manifest.schema.json`](schemas/manifest.schema.json) by `scripts/gen_readme.py`. Top-level keys starting with `x-` are allowed as extensions.
+
 <!-- END GENERATED: fields -->
 
 ## GitHub Action
