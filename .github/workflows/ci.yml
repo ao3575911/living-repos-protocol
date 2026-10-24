@@ -13,6 +13,11 @@ jobs:
       - uses: DavidAnson/markdownlint-cli2-action@v24.2.0
         with:
           globs: "**/*.md"
+      - name: Check links (offline, relative links and anchors)
+        uses: lycheeverse/lychee-action@v2.9.0
+        with:
+          args: --offline --include-fragments --no-progress '**/*.md'
+          fail: true
       - uses: actions/setup-python@v7.1.0
         with:
           python-version: "3.12"

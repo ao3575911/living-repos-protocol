@@ -32,7 +32,7 @@ def kind(prop):
     return "string"
 
 
-def fields():
+def fields(link="schemas/manifest.schema.json"):
     schema = json.loads((ROOT / "schemas/manifest.schema.json").read_text())
     required = set(schema["required"])
     rows = ["| Field | Type | Required | Allowed | Description |", "| --- | --- | --- | --- | --- |"]
@@ -44,15 +44,18 @@ def fields():
                 walk(prop["properties"], set(prop.get("required", [])), f"{prefix}{name}.")
     walk(schema["properties"], required)
     rows.append("")
-    rows.append("Generated from [`schemas/manifest.schema.json`](schemas/manifest.schema.json) by `scripts/gen_readme.py`. Top-level keys starting with `x-` are allowed as extensions.")
+    rows.append(f"Generated from [`schemas/manifest.schema.json`]({link}) by `scripts/gen_readme.py`. Top-level keys starting with `x-` are allowed as extensions.")
     return "\n".join(rows)
 
 
 SECTIONS = {"badges": badges, "fields": fields}
+# docs/ pages also render on the Pages site, where relative links to schemas/ break.
+DOCS_SECTIONS = {"badges": badges,
+                 "fields": lambda: fields(f"https://github.com/{REPO}/blob/main/schemas/manifest.schema.json")}
 
 
-def render(text):
-    for name, fn in SECTIONS.items():
+def render(text, sections=SECTIONS):
+    for name, fn in sections.items():
         text = re.sub(rf"(<!-- BEGIN GENERATED: {name} -->\n).*?(\n<!-- END GENERATED: {name} -->)",
                       lambda m: m.group(1) + "\n" + fn() + "\n" + m.group(2), text, flags=re.S)
     return text
@@ -63,7 +66,7 @@ stale = []
 for name in TARGETS:
     path = ROOT / name
     current = path.read_text()
-    new = render(current)
+    new = render(current, DOCS_SECTIONS if name.startswith("docs/") else SECTIONS)
     if new == current:
         continue
     if "--check" in sys.argv:

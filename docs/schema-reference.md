@@ -22,6 +22,6 @@ Fields of `.living/manifest.yaml` as enforced in strict mode. Lenient mode (the 
 | `snapshot.retention_days` | integer | no | - | Days to keep each snapshot. Default 7. |
 | `secrets` | array of strings | no | - | Names of the secrets the agent needs, never their values. Requires the read_secrets capability. Optional. |
 
-Generated from [`schemas/manifest.schema.json`](schemas/manifest.schema.json) by `scripts/gen_readme.py`. Top-level keys starting with `x-` are allowed as extensions.
+Generated from [`schemas/manifest.schema.json`](https://github.com/ao3575911/living-repos-protocol/blob/main/schemas/manifest.schema.json) by `scripts/gen_readme.py`. Top-level keys starting with `x-` are allowed as extensions.
 
 <!-- END GENERATED: fields -->

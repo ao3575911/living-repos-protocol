@@ -11,8 +11,10 @@ Usage:
   python scripts/validate.py [--strict] [PATH_OR_GLOB ...]
 With no paths it runs the self-test over examples/ and tests/.
 """
-import glob, json, pathlib, sys
+import glob, json, pathlib, re, sys
 import jsonschema, yaml
+
+import match
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
@@ -68,12 +70,13 @@ def self_test():
     for m in missing:
         print(f"FAIL no description: {m}")
     ok = not missing
-    import re
     m = re.search(r"^## \[(\d+\.\d+\.\d+)\]", (ROOT / "CHANGELOG.md").read_text(), re.M)
-    want = f"https://ao3575911.github.io/living-repos-protocol/schemas/v{m.group(1)}/manifest.schema.json"
-    id_ok = STRICT.schema.get("$id") == want
-    ok &= id_ok
-    print(("ok   " if id_ok else f"FAIL want {want}, got ") + f"$id {STRICT.schema.get('$id')}")
+    for v in (STRICT, RUNTIME):
+        name = "manifest" if v is STRICT else "runtime"
+        want = f"https://ao3575911.github.io/living-repos-protocol/schemas/v{m.group(1)}/{name}.schema.json"
+        id_ok = v.schema.get("$id") == want
+        ok &= id_ok
+        print(("ok   " if id_ok else f"FAIL want {want}, got ") + f"$id {v.schema.get('$id')}")
     for p in files("examples/*.yaml") + files("tests/valid/*.yaml"):
         e, w = check(p, strict=True)
         ok &= not e
@@ -89,7 +92,6 @@ def self_test():
         rejected = bool(check(p, strict=True)[0])
         ok &= rejected
         print(("ok   strict rejected " if rejected else "FAIL strict accepted ") + p)
-    import match
     for d in files("tests/runtime/*/"):
         name = pathlib.Path(d).name
         runtime, errors = match.load_runtime(pathlib.Path(d) / "runtime.yaml")
