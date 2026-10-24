@@ -1,8 +1,6 @@
 # Living Repositories Protocol
-Canonical protocol/specification repository for Living Repositories.
 
-A manifest that declares what a repository's cloud agent may do, how it is isolated and where it reports state, with a schema and a validator to enforce it.
-Initial target: `v0.1.0-draft`
+A manifest format that states what a repository's cloud agent may do, how it is isolated and where it reports state, plus a JSON Schema and validator that enforce it.
 
 <!-- BEGIN GENERATED: badges -->
 
@@ -14,7 +12,23 @@ Initial target: `v0.1.0-draft`
 
 ## What it is
 
-The specification for Living Repositories: repositories that bring their own cloud agent runtime. It defines the `.living/manifest.yaml` format and publishes a JSON Schema for it.
+A Living Repository carries its own agent contract in `.living/manifest.yaml`. A runtime reads the manifest, compares it with what the runtime supports, and refuses to start the agent if the two do not match. This repository defines that contract: the spec, the manifest schema (lenient and strict), the runtime capability document and a validator.
+
+## How it works
+
+```text
+.living/manifest.yaml ──► validate.py / GitHub Action ──► schema pass or fail
+          │
+          ▼
+runtime capability document ──► match.py ──► start agent, or refuse
+          │
+          ▼
+agent runs in its isolation_profile ──► publishes state to state_publication.target
+```
+
+- Six required fields: `protocol_version`, `project_id`, `agent_capabilities`, `isolation_profile`, `state_publication`, `logging_requirements`.
+- Lenient mode (default) accepts every manifest valid under v0.1.0. `--strict` enforces every rule in the spec.
+- Schemas for each release are frozen on the docs site under `/schemas/<tag>/`.
 
 ## Quickstart
 
